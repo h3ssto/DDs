@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title></title>
+        <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.dataTables.min.css"/>
+ 
+        <script
+              src="https://code.jquery.com/jquery-3.6.0.min.js"
+              integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+              crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.8/js/dataTables.fixedHeader.min.js"></script>
+    </head>
+    <body>
+        <table id = "table-lib">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>License</th>
+                    <th>Type(s)</th>
+                    <th>Last Updated</th>
+                    <th>Author(s)</th>
+                    <th>Affiliation(s)</th>
+                    <th>Language(s)</th>
+                    <th>Interfaces with</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <td class = "lib-name">
+                        {% if entry.url %}
+                        <a href="{{entry.url.url}}" {% if entry.url.github %} class = "link-github" {% endif %}>{{entry.name}}</a>
+                        {% else %}
+                            {{entry.name}}
+                        {% endif %}
+                    </td>
+                    <td class = "lib-license">
+                        {% if entry.license.url %}
+                            <a href = "{{entry.license.url}}">{{entry.license.name}}</a>
+                        {% else %}
+                            {{entry.license.name}}
+                        {% endif %}
+                    </td>
+                    <td class = "lib-type">L</td>
+                    <td class = "lib-last-updated">{{entry.last_updated}}</td>
+                    <td class = "lib-authors">
+                        {% if entry.users %}
+                            <ul>
+                            {% for user in entry.users %}
+                                {% if user.url %}
+                                    <li><a href="{{user.url}}" {% if user.github %} class = "link-github" {% endif %}>{{user.name}}</a></li>
+                                {% else %}
+                                    <li>{{user.name}}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                    <td>{% for x in entry.affiliations %}
+                            {{x}}{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{% for lang in entry.langs %}
+                            {{lang}}{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{% for x in entry.interfaces_with %}
+                            {{x}}{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $("#table-lib").DataTable({
+                paging:   false,
+                info: false,
+                fixedHeader: true
+            });
+        } );
+    </script>
+</html>
