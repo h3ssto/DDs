@@ -1,0 +1,70 @@
+html{
+
+    font-size:12pt;
+    font-family: sans-serif;
+}
+
+#table-lib{
+    border-collapse: collapse;
+
+}
+
+#table-lib tbody{
+    border-left:solid 1px black;
+    border-right:solid 1px black;
+}
+
+#table-lib tbody tr {
+    border-bottom: 1px solid black;
+}
+
+#table-lib tr:nth-child(2n){
+    background-color: #efefff;
+}
+
+.lib-name{
+    font-weight: bold;
+}
+
+.lib-name a, .lib-name a:visited{
+    text-decoration: none;
+    color:black;
+}
+
+.lib-license{
+    font-family: monospace;
+    text-align: center;
+    color: black;
+
+}
+
+.lib-last-updated{
+    text-align:right;
+}
+
+.lib-authors ul{
+    list-style: none;
+    margin:0 0 0 0;
+    üadding:0 0 0 0;
+}
+
+.lib-authors a{
+    text-decoration: none;
+    color:black;
+}
+
+.lib-authors a:hover{
+    text-decoration: underline;
+}
+
+.link-github{
+
+    background-image: url("assets/github.svg");
+    background-repeat: no-repeat;
+    background-size: 16px;
+
+    background-position: center right;
+
+    padding-right: 20px;
+
+}
